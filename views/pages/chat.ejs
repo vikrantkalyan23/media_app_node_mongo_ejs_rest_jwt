@@ -1,0 +1,13 @@
+<%- include('../partials/header') %>
+<h1>Group Chat</h1>
+<ul>
+   <% chats.forEach(chat => { %>
+       <li><strong><%= chat.username %>:</strong> <%= chat.message %></li>
+   <% }) %>
+</ul>
+<form action="/chat" method="POST">
+   <input type="text" name="username" placeholder="Your Name" required />
+   <input type="text" name="message" placeholder="Your Message" required />
+   <button type="submit">Send</button>
+</form>
+<%- include('../partials/footer') %>
