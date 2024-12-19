@@ -5,3 +5,6 @@ Media App Using Node.js, MongoDB, EJS Template, RESTAPIs and JWT
 
 npm init -y
 
+npm install express mongoose dotenv ejs body-parser jsonwebtoken bcryptjs nodemon
+
+npm install --save-dev eslint prettier
