@@ -8,3 +8,7 @@ npm init -y
 npm install express mongoose dotenv ejs body-parser jsonwebtoken bcryptjs nodemon
 
 npm install --save-dev eslint prettier
+
+docker-compose up --build
+
+

@@ -4,14 +4,14 @@ const bcrypt = require('bcryptjs');
 const Admin = require('../models/Admin');
 const News = require('../models/News');
 const router = express.Router();
+const auth = require('../middleware/auth');
 
 // Register
-router.post('/register', async (req, res) => {
-    const { username, password } = req.body;
+router.post('/news', auth, async (req, res) => {
+    const { title, content, category } = req.body;
     try {
-        const admin = new Admin({ username, password });
-        await admin.save();
-        res.send('Admin Registered');
+        await News.create({ title, content, category });
+        res.send('News Added');
     } catch (err) {
         res.status(500).send('Server Error');
     }
