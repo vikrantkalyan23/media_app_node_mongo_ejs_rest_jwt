@@ -29,6 +29,26 @@ app.get('/', (req, res) => {
     res.render('pages/home');
 });
 
+app.get('/sports', (req, res) => {
+    res.render('pages/sports');
+});
+
+// Contact Us Page Route
+app.get('/contact', (req, res) => {
+    res.render('pages/contact');
+});
+
+// About Us Page Route
+app.get('/about', (req, res) => {
+    res.render('pages/about');
+});
+
+// Contact Form Submission (POST Route)
+app.post('/contact', (req, res) => {
+    // Handle form submission here
+    res.send('Thank you for contacting us!');
+});
+
 // MongoDB Connection
 mongoose
     .connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })

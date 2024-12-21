@@ -7,18 +7,7 @@
     <link rel="stylesheet" href="../css/styles.css">
 </head>
 <body>
-    <header>
-        <div class="logo">Logo</div>
-        <nav>
-            <ul>
-                <li><a href="#">Home</a></li>
-                <li><a href="#">Sports</a></li>
-                <li><a href="#">Contact Us</a></li>
-                <li><a href="#">About Us</a></li>
-            </ul>
-        </nav>
-    </header>
-
+    <%- include('../partials/header') %>
     <main>
         <!-- Weather Report Section -->
         <section class="weather">
@@ -57,10 +46,8 @@
         </section>
     </main>
 
-    <footer>
-        Footer
-    </footer>
+    <%- include('../partials/footer') %>
 
-    <script src="/js/script.js"></script>
+    
 </body>
 </html>
