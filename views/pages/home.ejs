@@ -1,11 +1,66 @@
-<%- include('../partials/header') %>
-<h1>Welcome to the Media App</h1>
-<section>
-   <h2>Latest News</h2>
-   <ul>
-       <% news.forEach(item => { %>
-           <li><strong><%= item.title %></strong> - <%= item.content %></li>
-       <% }) %>
-   </ul>
-</section>
-<%- include('../partials/footer') %>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Media App</title>
+    <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+    <header>
+        <div class="logo">Logo</div>
+        <nav>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Sports</a></li>
+                <li><a href="#">Contact Us</a></li>
+                <li><a href="#">About Us</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Weather Report Section -->
+        <section class="weather">
+            <h2>Weather Report</h2>
+        </section>
+
+        <!-- Image Slider -->
+        <section class="slider">
+            <button class="prev">&#10094;</button>
+            <div class="slides">
+                <div class="slide">Image 1</div>
+                <div class="slide">Image 2</div>
+                <div class="slide">Image 3</div>
+            </div>
+            <button class="next">&#10095;</button>
+        </section>
+
+        <!-- Latest News Section -->
+        <section class="news">
+            <div class="news-item">Latest News 1</div>
+            <div class="news-item">Latest News 2</div>
+            <div class="news-item">Latest News 3</div>
+        </section>
+
+        <!-- Story Section -->
+        <section class="story">
+            <p>Some story related to news...</p>
+        </section>
+
+        <!-- Chat Box -->
+        <section class="chat-box">
+            <h3>Chat Box</h3>
+            <div id="chat-container"></div>
+            <input type="text" id="chat-input" placeholder="Type a message...">
+            <button id="send-btn">Send</button>
+        </section>
+    </main>
+
+    <footer>
+        Footer
+    </footer>
+
+    <script src="/js/script.js"></script>
+</body>
+</html>

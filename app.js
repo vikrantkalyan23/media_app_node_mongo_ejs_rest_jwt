@@ -14,8 +14,20 @@ const io = socketio(server); // Attach Socket.IO to the server
 // Middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+// app.set('view engine', 'ejs');
+// app.set('views', path.join(__dirname, 'views'));
+
+
+app.use(express.static('public'));
+
+// Set the view engine to EJS
 app.set('view engine', 'ejs');
-app.set('views', path.join(__dirname, 'views'));
+app.set('views', './views');
+
+// Route to render home.ejs
+app.get('/', (req, res) => {
+    res.render('pages/home');
+});
 
 // MongoDB Connection
 mongoose
