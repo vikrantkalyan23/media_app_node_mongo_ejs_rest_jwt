@@ -1,4 +1,37 @@
 <footer>
     <p>&copy; 2024 Media App. All rights reserved.</p>
+
+    <!-- Chat Section -->
+    <div id="chat-box">
+        <h4>Chat Box</h4>
+        <div id="messages" style="height: 150px; overflow-y: scroll; border: 1px solid #ccc; padding: 5px; margin-bottom: 10px;">
+            <!-- Messages will appear here -->
+        </div>
+        <input id="message-input" type="text" placeholder="Type your message" style="width: 80%; padding: 5px;">
+        <button id="send-button" style="padding: 5px;">Send</button>
+    </div>
 </footer>
 <script src="/js/script.js"></script>
+<script src="/socket.io/socket.io.js"></script>
+<script>
+    const socket = io();
+
+    // Listen for new messages
+    socket.on('message', (message) => {
+        const messageContainer = document.getElementById('messages');
+        const newMessage = document.createElement('div');
+        newMessage.textContent = message;
+        messageContainer.appendChild(newMessage);
+        messageContainer.scrollTop = messageContainer.scrollHeight; // Auto-scroll to the latest message
+    });
+
+    // Send message
+    document.getElementById('send-button').addEventListener('click', () => {
+        const input = document.getElementById('message-input');
+        const message = input.value;
+        if (message.trim()) {
+            socket.emit('sendMessage', message);
+            input.value = ''; // Clear the input
+        }
+    });
+</script>
