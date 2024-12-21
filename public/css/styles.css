@@ -107,3 +107,29 @@ footer {
     background-color: #333;
     color: #fff;
 }
+
+#chat-box {
+    margin-top: 20px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    background-color: #f9f9f9;
+    border-radius: 5px;
+}
+
+#chat-box h4 {
+    margin: 0 0 10px;
+}
+
+#messages div {
+    padding: 5px;
+    border-bottom: 1px solid #ddd;
+}
+
+#messages div:last-child {
+    border-bottom: none;
+}
+
+#message-input {
+    margin-right: 5px;
+}
+
