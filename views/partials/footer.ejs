@@ -1,6 +1,5 @@
 <footer class="bg-light text-center text-lg-start mt-5">
-    <div class="dropdown position-fixed bottom-0 end-0 mb-3 me-3 bd-mode-toggle">
-        
+    <div class="dropdown position-fixed bottom-0 end-0 mb-3 me-3 bd-mode-toggle">      
         <div class="container p-4">
             <div id="chat-box">
                 <h5 class="text-uppercase">Chat Box</h5>
@@ -14,21 +13,15 @@
             </div>
         </div>
       </div>
-
-    
     <div class="text-center p-3 bg-black text-white">
         &copy; 2024 Update 24x7. All rights reserved.
     </div>
 </footer>
-
-
-
 <script src="/js/bootstrap.bundle.min.js"></script>
 <script src="/js/script.js"></script>
 <script src="/socket.io/socket.io.js"></script>
 <script>
     const socket = io();
-
     // Listen for new messages
     socket.on('message', (message) => {
         const messageContainer = document.getElementById('messages');
@@ -37,7 +30,6 @@
         messageContainer.appendChild(newMessage);
         messageContainer.scrollTop = messageContainer.scrollHeight; // Auto-scroll to the latest message
     });
-
     // Send message
     document.getElementById('send-button').addEventListener('click', () => {
         const input = document.getElementById('message-input');
