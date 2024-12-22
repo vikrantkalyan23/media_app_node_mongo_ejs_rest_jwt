@@ -17,6 +17,10 @@ body {
     height: 600px;
     object-fit: cover;
 }
+.marketing {
+    margin-top: 2rem;
+    padding-top: 2rem;
+  }
   .marketing .col-lg-4 {
     margin-bottom: 1.5rem;
     text-align: center;
