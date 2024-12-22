@@ -13,6 +13,10 @@ body {
   .carousel-item {
     height: 32rem;
   }
+  .carousel-inner img {
+    height: 600px;
+    object-fit: cover;
+}
   .marketing .col-lg-4 {
     margin-bottom: 1.5rem;
     text-align: center;
