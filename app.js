@@ -4,12 +4,14 @@ const dotenv = require('dotenv');
 const path = require('path');
 const http = require('http'); // Import HTTP module
 const socketio = require('socket.io'); // Import Socket.IO
+const nodemailer = require('nodemailer');
 
 dotenv.config();
 
 const app = express();
 const server = http.createServer(app); // Create HTTP server with the app
 const io = socketio(server); // Attach Socket.IO to the server
+
 
 // Middleware
 app.use(express.json());
@@ -43,10 +45,46 @@ app.get('/about', (req, res) => {
     res.render('pages/about');
 });
 
+const isValidEmail = (email) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+};
+
 // Contact Form Submission (POST Route)
-app.post('/contact', (req, res) => {
-    // Handle form submission here
-    res.send('Thank you for contacting us!');
+app.post('/submit-form', (req, res) => {
+    const { name, email, subject, message } = req.body;
+
+    if (!name || !email || !subject || !message) {
+        return res.status(400).json({ error: 'All fields are required' });
+    }
+
+    if (!isValidEmail(email)) {
+        return res.status(400).json({ error: 'Invalid email address' });
+    }
+
+    // Send email using Nodemailer (optional)
+    const transporter = nodemailer.createTransport({
+        service: 'gmail',
+        auth: {
+            user: 'your-email@gmail.com', // Replace with your email
+            pass: 'your-email-password', // Replace with your email password
+        },
+    });
+
+    const mailOptions = {
+        from: email,
+        to: 'your-email@gmail.com', // Replace with your email
+        subject: `Contact Form: ${subject}`,
+        text: `Name: ${name}\nEmail: ${email}\nMessage: ${message}`,
+    };
+
+    transporter.sendMail(mailOptions, (err, info) => {
+        if (err) {
+            console.error(err);
+            return res.status(500).json({ error: 'Failed to send email' });
+        }
+        res.status(200).json({ message: 'Form submitted successfully' });
+    });
 });
 
 // MongoDB Connection
