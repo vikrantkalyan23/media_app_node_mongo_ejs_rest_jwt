@@ -116,3 +116,13 @@ body {
   .bd-mode-toggle .dropdown-menu .active .bi {
     display: block !important;
   }
+  #div-chat-box {
+    z-index: 9999;
+    background-color:aliceblue;
+    border-radius: 5%;
+    border: 1px solid #712cf9;
+  }
+  .map-container {
+    height: 400px;
+    width: 100%;
+}
