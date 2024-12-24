@@ -3,7 +3,7 @@ const axios = require('axios');
 const router = express.Router();
 
 // Replace with your OpenWeatherMap API key
-const API_KEY = 'YOUR_API_KEY_HERE';
+const API_KEY = '7e1b5e17d3639105c0bcc038527da6ce';
 
 router.get('/', async (req, res) => {
     const { lat, lon } = req.query;
