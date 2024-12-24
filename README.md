@@ -11,4 +11,7 @@ npm install --save-dev eslint prettier
 
 docker-compose up --build
 
+npm install nodemailer
+
+npm install axios
 

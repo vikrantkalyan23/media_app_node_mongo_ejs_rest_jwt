@@ -12,7 +12,10 @@
 <body>
     <%- include('../partials/header') %>
         <main>
-
+            <div class="weather">
+                <h2>Current Weather</h2>
+                <div id="weatherReport">Fetching weather report...</div>
+            </div>
             <div id="myCarousel" class="carousel slide mb-6" data-bs-ride="carousel">
                 <div class="carousel-indicators">
                     <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="0" class="active"
@@ -145,6 +148,36 @@
                 </div>
             </div>
             <%- include('../partials/footer') %>
+            <script>
+                const fetchWeather = async () => {
+                    if (navigator.geolocation) {
+                        navigator.geolocation.getCurrentPosition(async (position) => {
+                            const lat = position.coords.latitude;
+                            const lon = position.coords.longitude;
+            
+                            try {
+                                const response = await fetch(`/weather?lat=${lat}&lon=${lon}`);
+                                const data = await response.json();
+            
+                                const weatherReport = `
+                                    <p><strong>Location:</strong> ${data.name}</p>
+                                    <p><strong>Temperature:</strong> ${data.main.temp}°C</p>
+                                    <p><strong>Condition:</strong> ${data.weather[0].description}</p>
+                                `;
+                                document.getElementById('weatherReport').innerHTML = weatherReport;
+                            } catch (error) {
+                                document.getElementById('weatherReport').innerHTML = 'Error fetching weather data.';
+                            }
+                        }, () => {
+                            document.getElementById('weatherReport').innerHTML = 'Location access denied.';
+                        });
+                    } else {
+                        document.getElementById('weatherReport').innerHTML = 'Geolocation is not supported by this browser.';
+                    }
+                };
+            
+                fetchWeather();
+            </script>
         </main>
 </body>
 </html>
