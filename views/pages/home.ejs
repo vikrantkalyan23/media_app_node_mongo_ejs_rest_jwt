@@ -12,10 +12,43 @@
 <body>
     <%- include('../partials/header') %>
         <main>
-            <div class="weather">
-                <h2>Current Weather</h2>
-                <div id="weatherReport">Fetching weather report...</div>
+            <div class="container marketing">
+                <div class="row text-center mb-3" id="weatherReport">
+                    <div class="col-md-3">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">Weather</h5>
+                                <p>&nbsp;</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">Weather Icon</h5>
+                                <p>&nbsp;</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">Temperature</h5>
+                                <p>&nbsp;</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">City Name</h5>
+                                <p>&nbsp;</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
+            
             <div id="myCarousel" class="carousel slide mb-6" data-bs-ride="carousel">
                 <div class="carousel-indicators">
                     <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="0" class="active"
@@ -158,12 +191,8 @@
                             try {
                                 const response = await fetch(`/weather?lat=${lat}&lon=${lon}`);
                                 const data = await response.json();
-            
-                                const weatherReport = `
-                                    <p><strong>Location:</strong> ${data.name}</p>
-                                    <p><strong>Temperature:</strong> ${data.main.temp}°C</p>
-                                    <p><strong>Condition:</strong> ${data.weather[0].description}</p>
-                                `;
+                                console.log(data)
+                                const weatherReport = `<div class="col-md-3"><div class="card"><div class="card-body"><h5 class="card-title">Weather</h5><p>${data.weather[0].description}</p></div></div></div><div class="col-md-3"><div class="card"><div class="card-body"><h5 class="card-title">Weather Icon</h5><p>&nbsp;</p></div></div></div><div class="col-md-3"><div class="card"><div class="card-body"><h5 class="card-title">Temperature</h5><p>${data.main.temp}°C</p></div></div></div><div class="col-md-3"><div class="card"><div class="card-body"><h5 class="card-title">City Name</h5><p>${data.name}</p></div></div></div>`;
                                 document.getElementById('weatherReport').innerHTML = weatherReport;
                             } catch (error) {
                                 document.getElementById('weatherReport').innerHTML = 'Error fetching weather data.';
