@@ -15,3 +15,8 @@ npm install nodemailer
 
 npm install axios
 
+npm install bcrypt
+
+npm install cookie-parser
+
+
