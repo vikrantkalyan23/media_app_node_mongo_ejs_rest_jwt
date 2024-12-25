@@ -136,3 +136,13 @@ body {
     color: #333;
     margin-top: 10px;
 }
+.gallery-image {
+    overflow: hidden;
+    position: relative;
+}
+.gallery-image img {
+    transition: transform 0.3s ease;
+}
+.gallery-image:hover img {
+    transform: scale(1.1);
+}
