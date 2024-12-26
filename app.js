@@ -6,10 +6,10 @@ const http = require('http'); // Import HTTP module
 const socketio = require('socket.io'); // Import Socket.IO
 const nodemailer = require('nodemailer');
 const authRoutes = require('./routes/auth');
-const cookieParser = require('cookie-parser');
+//const cookieParser = require('cookie-parser');
 
 // Middleware for cookies
-app.use(cookieParser());
+//app.use(cookieParser());
 
 // Add authentication routes
 //app.use('/auth', authRoutes);
