@@ -1,0 +1,59 @@
+<div class="container mt-5">
+    <h2>Admin Panel - News Management</h2>
+    <form id="addNewsForm">
+        <div class="mb-3">
+            <label for="title" class="form-label">Title</label>
+            <input type="text" id="title" class="form-control" required />
+        </div>
+        <div class="mb-3">
+            <label for="content" class="form-label">Content</label>
+            <textarea id="content" class="form-control" rows="4" required></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Add News</button>
+    </form>
+    <hr />
+    <h3>Existing News</h3>
+    <div id="newsList"></div>
+</div>
+<script>
+    const token = localStorage.getItem('token'); // Store JWT securely
+    const fetchNews = async () => {
+        const response = await fetch('/admin', {
+            headers: { Authorization: token }
+        });
+        const news = await response.json();
+        const newsList = news.map(n => `
+            <div class="card mt-3">
+                <div class="card-body">
+                    <h5>${n.title}</h5>
+                    <p>${n.content}</p>
+                    <button class="btn btn-danger" onclick="deleteNews('${n._id}')">Delete</button>
+                </div>
+            </div>
+        `).join('');
+        document.getElementById('newsList').innerHTML = newsList;
+    };
+
+    const addNews = async (e) => {
+        e.preventDefault();
+        const title = document.getElementById('title').value;
+        const content = document.getElementById('content').value;
+        await fetch('/admin/add', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json', Authorization: token },
+            body: JSON.stringify({ title, content }),
+        });
+        fetchNews();
+    };
+
+    const deleteNews = async (id) => {
+        await fetch(`/admin/${id}`, {
+            method: 'DELETE',
+            headers: { Authorization: token },
+        });
+        fetchNews();
+    };
+
+    document.getElementById('addNewsForm').addEventListener('submit', addNews);
+    fetchNews();
+</script>

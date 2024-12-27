@@ -1,51 +1,12 @@
 const express = require('express');
-const jwt = require('jsonwebtoken');
-const bcrypt = require('bcryptjs');
-const Admin = require('../models/Admin');
-const News = require('../models/News');
 const router = express.Router();
-const auth = require('../middleware/auth');
+const { verifyToken } = require('../middleware/authMiddleware'); // Middleware to verify JWT
+const { addNews, getNews, updateNews, deleteNews } = require('../controllers/newsController');
 
-// Register
-router.post('/news', auth, async (req, res) => {
-    const { title, content, category } = req.body;
-    try {
-        await News.create({ title, content, category });
-        res.send('News Added');
-    } catch (err) {
-        res.status(500).send('Server Error');
-    }
-});
-
-// Login
-router.post('/login', async (req, res) => {
-    const { username, password } = req.body;
-    try {
-        const admin = await Admin.findOne({ username });
-        if (!admin) return res.status(400).send('Invalid credentials');
-
-        const isMatch = await bcrypt.compare(password, admin.password);
-        if (!isMatch) return res.status(400).send('Invalid credentials');
-
-        const token = jwt.sign({ id: admin._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
-        res.json({ token });
-    } catch (err) {
-        res.status(500).send('Server Error');
-    }
-});
-
-// Add News
-router.post('/news', async (req, res) => {
-    const { title, content, category } = req.body;
-    try {
-        await News.create({ title, content, category });
-        res.send('News Added');
-    } catch (err) {
-        res.status(500).send('Server Error');
-    }
-});
-
-// Edit/Delete News (Add as needed)
-// ...
+// Admin routes (protected by JWT)
+router.post('/add', verifyToken, addNews);       // Add a news post
+router.get('/', verifyToken, getNews);          // Get all news posts
+router.put('/:id', verifyToken, updateNews);    // Update a news post
+router.delete('/:id', verifyToken, deleteNews); // Delete a news post
 
 module.exports = router;
