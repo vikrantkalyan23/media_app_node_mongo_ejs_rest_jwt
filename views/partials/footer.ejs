@@ -2,7 +2,6 @@
     <div class="toast-container position-fixed bottom-0 end-0 pb-5 mb-5">
         <div id="liveChat" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
           <div class="toast-header">
-            
             <strong class="me-auto">Chat</strong>
             <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
           </div>
@@ -18,10 +17,8 @@
           </div>
         </div>
       </div>
-      
     <div class="dropdown position-fixed bottom-0 end-0 mb-3 me-3 bd-mode-toggle">  
         <button type="button" class="btn btn-danger" id="liveChatBtn">Chat box</button>
-       
       </div>
     <div class="text-center p-3 bg-black text-white">
         &copy; 2024 Update 24x7. All rights reserved.
@@ -49,10 +46,8 @@
             input.value = ''; // Clear the input
         }
     });
-
 const toastTrigger = document.getElementById('liveChatBtn')
 const toastLiveExample = document.getElementById('liveChat')
-
 if (toastTrigger) {
   const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastLiveExample)
   toastTrigger.addEventListener('click', () => {

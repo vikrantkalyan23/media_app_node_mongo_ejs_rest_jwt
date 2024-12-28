@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,13 +7,11 @@
     <link rel="stylesheet" href="/css/bootstrap.min.css">
     <link rel="stylesheet" href="/css/styles.css">
 </head>
-
 <body>
     <%- include('../partials/header') %>
         <main>
             <div class="container marketing">
                 <h1 class="text-center mb-4">Contact Us</h1>
-                
                 <div class="row">
                     <div class="col-lg-2">&nbsp;</div>
                     <div class="col-lg-8">
@@ -24,7 +21,6 @@
                 </div>
                 <hr>
                 <div class="row">
-                    <!-- Google Map -->
                     <div class="col-md-6 mb-4">
                         <div class="map-container">
                             <iframe
@@ -34,7 +30,6 @@
                             </iframe>
                         </div>
                     </div>
-                    <!-- Contact Form -->
                     <div class="col-md-6">
                         <form id="contact_form" method="post">
                             <div class="mb-3">
@@ -66,21 +61,18 @@
             <script>
                 document.querySelector('#contact_form').addEventListener('submit', async (e) => {
                     e.preventDefault();
-            
                     const formData = {
                         name: document.getElementById('name').value,
                         email: document.getElementById('email').value,
                         subject: document.getElementById('subject').value,
                         message: document.getElementById('message').value,
                     };
-            
                     try {
                         const response = await fetch('/submit-form', {
                             method: 'POST',
                             headers: { 'Content-Type': 'application/json' },
                             body: JSON.stringify(formData),
                         });
-            
                         const result = await response.json();
                         if (response.ok) {
                             alert(result.message);
@@ -93,8 +85,6 @@
                     }
                 });
             </script>
-            
         </main>
 </body>
-
 </html>

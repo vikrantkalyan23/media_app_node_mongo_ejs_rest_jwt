@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,7 +7,6 @@
     <link rel="stylesheet" href="/css/bootstrap.min.css">
     <link rel="stylesheet" href="/css/styles.css">
 </head>
-
 <body>
     <%- include('../partials/header') %>
         <main>
@@ -48,7 +46,6 @@
                     </div>
                 </div>
             </div>
-            
             <div id="myCarousel" class="carousel slide mb-6" data-bs-ride="carousel">
                 <div class="carousel-indicators">
                     <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="0" class="active"
@@ -78,7 +75,6 @@
                     <span class="visually-hidden">Next</span>
                 </button>
             </div>
-
             <div class="container marketing">
                 <div class="row">
                     <div class="col-lg-4">
@@ -118,9 +114,7 @@
                         </svg>
                     </div>
                 </div>
-
                 <hr class="featurette-divider">
-
                 <div class="row featurette">
                     <div class="col-md-7 order-md-2">
                         <h2 class="featurette-heading fw-normal lh-1">Oh yeah, it’s that good. <span
@@ -138,9 +132,7 @@
                         </svg>
                     </div>
                 </div>
-
                 <hr class="featurette-divider">
-
                 <div class="row featurette">
                     <div class="col-md-7">
                         <h2 class="featurette-heading fw-normal lh-1">And lastly, this one. <span
@@ -196,7 +188,6 @@
                     </div>
                 </div>
             </div>
-        
             <%- include('../partials/footer') %>
             <script>
                 const fetchWeather = async () => {
@@ -204,7 +195,6 @@
                         navigator.geolocation.getCurrentPosition(async (position) => {
                             const lat = position.coords.latitude;
                             const lon = position.coords.longitude;
-            
                             try {
                                 const response = await fetch(`/weather?lat=${lat}&lon=${lon}`);
                                 const data = await response.json();
@@ -212,7 +202,6 @@
                                 const weatherReport = `
                                 <div class="col-md-3"><div class="card"><div class="card-body"><h5 class="card-title">Weather</h5><p>${data.weather[0].description}</p></div></div></div><div class="col-md-3"><div class="card"><div class="card-body"><h5 class="card-title">Weather Icon</h5><img src="http://openweathermap.org/img/wn/${iconCode}.png" alt="Weather Icon" /></div></div></div><div class="col-md-3"><div class="card"><div class="card-body"><h5 class="card-title">Temperature</h5><p>${data.main.temp}°C</p></div></div></div><div class="col-md-3"><div class="card"><div class="card-body"><h5 class="card-title">City Name</h5><p>${data.name}</p></div></div></div>
                                 `;
-            
                                 document.getElementById('weatherReport').innerHTML = weatherReport;
                             } catch (error) {
                                 document.getElementById('weatherReport').innerHTML = 'Error fetching weather data.';
@@ -224,10 +213,8 @@
                         document.getElementById('weatherReport').innerHTML = 'Geolocation is not supported by this browser.';
                     }
                 };
-            
                 fetchWeather();
             </script>
-            
         </main>
 </body>
 </html>

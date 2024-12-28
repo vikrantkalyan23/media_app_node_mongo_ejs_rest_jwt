@@ -1,6 +1,5 @@
 const express = require('express');
-const News = require('../models/News');
-const Chat = require('../models/Chat');
+const Chat = require('../models/chatModel');
 const router = express.Router();
 
 // Home Page
