@@ -15,9 +15,9 @@ router.get('/register', (req, res) => {
 router.get('/news', async (req, res) => {
     try {
         const newsList = await News.find().sort({ createdAt: -1 });
-        res.render('admin/news', { newsList:newsList });
+        res.render('admin/news', { newsList:newsList ,errorMessage:null});
     } catch (err) {
-        res.render('admin/news', { errorMessage: 'Error fetching news', successMessage: null });
+        res.render('admin/news', { newsList: null,errorMessage: 'Error fetching news' });
     }
 });
 

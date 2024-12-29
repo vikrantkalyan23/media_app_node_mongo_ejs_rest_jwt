@@ -3,13 +3,8 @@ const Chat = require('../models/chatModel');
 const router = express.Router();
 
 // Home Page
-router.get('/', async (req, res) => {
-    try {
-        const news = await News.find().sort({ date: -1 }).limit(3);
-        res.render('frontend/home', { news });
-    } catch (err) {
-        res.status(500).send('Server Error');
-    }
+router.get('/', (req, res) => {
+    res.render('frontend/home');
 });
 
 // Chat Page

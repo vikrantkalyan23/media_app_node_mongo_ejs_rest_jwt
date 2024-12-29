@@ -3,10 +3,11 @@ services:
   media-app:
     build: .
     ports:
-      - "3000:3000"
+      - "3500:3500"
     environment:
       MONGO_URI: mongodb://mongo:27017/mediaApp
-      JWT_SECRET: your_jwt_secret
+      JWT_SECRET: 4fb4fbeb4dbb424daf9ad14c0a2154cac8c8d4ec5daf2584f3142c3a0314c50a
+      SESSION_SECRET: 2ebaadd9d75e33a62f191348744efdd1977741c3495b638eda70d867319519f2
   mongo:
     image: mongo
     ports:

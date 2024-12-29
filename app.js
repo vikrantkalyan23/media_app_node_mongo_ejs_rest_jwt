@@ -16,6 +16,8 @@ const weatherRouter = require("./routes/weatherRoutes");
 const frontRoutes = require("./routes/frontRoutes");
 const adminRoutes = require('./routes/adminRoutes');
 const registerRoutes = require('./routes/registerRoutes'); 
+const News = require('./models/newsModel');
+
 dotenv.config();
 
 // Middleware
@@ -31,14 +33,27 @@ app.use(session({ secret: process.env.SESSION_SECRET, resave: false, saveUniniti
 app.set("view engine", "ejs");
 app.set("views", "./views");
 // Route to render home.ejs
-app.get("/", (req, res) => {
-  res.render("frontend/home");
-});
-// Other app configurations
+app.get("/", async(req, res) => {
+  try {
+    const latestNews = await News.find().sort({ date: -1 }).limit(3);
+    const newsList = await News.find().sort({ createdAt: -1 });
+      res.render('frontend/home', { latestNews:latestNews ,newsList:newsList,errorMessage:null});
+  } catch (err) {
+     res.render('frontend/home', { latestNews:null,errorMessage: 'Error fetching news' });
+  }
+ });
+ 
 app.use("/weather", weatherRouter);
-app.get("/sports", (req, res) => {
-  res.render("frontend/sports");
-});
+
+app.get("/sports", async(req, res) => {
+  try {
+    const newsList = await News.find().sort({ createdAt: -1 });
+      res.render('frontend/sports', {newsList:newsList,errorMessage:null});
+  } catch (err) {
+     res.render('frontend/sports', { newsList:null,errorMessage: 'Error fetching news' });
+  }
+ });
+
 // Contact Us Page Route
 app.get("/contact", (req, res) => {
   res.render("frontend/contact");
