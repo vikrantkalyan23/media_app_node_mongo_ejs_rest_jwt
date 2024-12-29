@@ -21,20 +21,20 @@ app.set("view engine", "ejs");
 app.set("views", "./views");
 // Route to render home.ejs
 app.get("/", (req, res) => {
-  res.render("pages/home");
+  res.render("frontend/home");
 });
 // Other app configurations
 app.use("/weather", weatherRouter);
 app.get("/sports", (req, res) => {
-  res.render("pages/sports");
+  res.render("frontend/sports");
 });
 // Contact Us Page Route
 app.get("/contact", (req, res) => {
-  res.render("pages/contact");
+  res.render("frontend/contact");
 });
 // About Us Page Route
 app.get("/about", (req, res) => {
-  res.render("pages/about");
+  res.render("frontend/about");
 });
 const isValidEmail = (email) => {
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
