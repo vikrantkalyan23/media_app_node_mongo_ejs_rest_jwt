@@ -5,17 +5,28 @@ const path = require("path");
 const http = require("http"); // Import HTTP module
 const socketio = require("socket.io"); // Import Socket.IO
 const nodemailer = require("nodemailer");
-dotenv.config();
 const app = express();
 const server = http.createServer(app); // Create HTTP server with the app
 const io = socketio(server); // Attach Socket.IO to the server
+const bodyParser = require('body-parser');
+const cookieParser = require('cookie-parser');
+const session = require('express-session');
+
 const weatherRouter = require("./routes/weatherRoutes");
 const frontRoutes = require("./routes/frontRoutes");
+const adminRoutes = require('./routes/adminRoutes');
+const registerRoutes = require('./routes/registerRoutes'); 
+dotenv.config();
 
 // Middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static("public"));
+
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(cookieParser());
+app.use(session({ secret: process.env.SESSION_SECRET, resave: false, saveUninitialized: true }));
+ 
 // Set the view engine to EJS
 app.set("view engine", "ejs");
 app.set("views", "./views");
@@ -36,6 +47,9 @@ app.get("/contact", (req, res) => {
 app.get("/about", (req, res) => {
   res.render("frontend/about");
 });
+ 
+app.use('/admin', adminRoutes);
+app.use('/auth', registerRoutes);
 const isValidEmail = (email) => {
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   return emailRegex.test(email);

@@ -20,4 +20,6 @@ npm install cookie-parser
 
 npm install socket.io
 
+npm install express-session
+
 docker-compose up --build
